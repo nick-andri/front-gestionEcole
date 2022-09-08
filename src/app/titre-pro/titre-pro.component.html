@@ -1,0 +1,46 @@
+<h1>Gestion des Titres pro</h1>
+
+
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <label for="search">Recherche : </label>
+  <input id="search" type="text" formControlName="searchExpression" />
+  <button>Rechercher</button>
+</form>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Nom</th>
+    <th>slug</th>
+    <th>Nouveau
+      <button [routerLink]="['/titres/create']" >
+        <mat-icon>add</mat-icon>
+      </button>
+    </th>
+  </tr>
+  </thead>
+  <tbody *ngIf="titres; else noTitres">
+  <tr *ngFor="let t of titres | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage, totalItems:totalItems}">
+    <td>{{t.titre}}</td>
+    <td>{{t.slug}}</td>
+    <td class="td-action">
+      <button [routerLink]="['/titres',t.id,'details']" >
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button [routerLink]="['/titres/update',t.id]">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button (click)="delete(t.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<ng-template #noTitres>
+  <span class="text-danger">Aucun utilisateur trouvé !</span>
+</ng-template>
+<pagination-controls *ngIf="titres"
+                     (pageChange)="pageChanged($event)"
+                     previousLabel="Précédent"
+                     nextLabel="Suivant"></pagination-controls>

@@ -1,0 +1,44 @@
+<div *ngIf="isUpdate"><h1>Modification utilisateur</h1></div>
+<div *ngIf="!isUpdate"><h1>Nouvel utilisateur</h1></div>
+  <div class="col-md-6">
+
+      <div class="card card-primary">
+        <div class="card_content">
+
+
+            <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+              <div class="form-group" >
+                <label for="prenom">Prenom</label>
+                <input id="prenom"  formControlName="prenom" class="form-control" ></div>
+              <div class="form-group" >
+                <label for="nom">Nom</label>
+                <input id="nom" formControlName="nom" class="form-control" ></div>
+              <div class="form-group" >
+                <label for="email"  >Email</label>
+                <input id="email"  formControlName="email" class="form-control"></div>
+              <div class="form-group" >
+                 <label for="password">Password</label>
+                 <input type="password" formControlName="password" id="password" class="form-control"/>
+              </div>
+              <div class="form-group" >
+                <label for="role">Role : </label>
+                <select id="role" formControlName="role"  class="form-control">
+                  <option value="ADMIN" >ADMIN</option>
+                  <option value="ETUDIANT" >ETUDIANT</option>
+                  <option value="FORMATEUR" >FORMATEUR</option>
+                </select>
+              </div>
+              <div class="form-group" >
+                <label for="image-path" >Image</label>
+                <input id="image-path"  formControlName="imagePath" class="form-control"></div>
+              <button *ngIf="!isUpdate" name="ButtonForm" class="btn btn-primary">creer</button>
+              <button *ngIf="isUpdate" name="ButtonForm"  class="btn btn-primary">update</button>
+            </div>
+            </form>
+          <button name="goBackButton" class="btn btn-primary" (click)="goBack()" >retour</button>
+        </div>
+      </div>
+
+  </div>
+

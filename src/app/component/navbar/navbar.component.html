@@ -1,0 +1,10 @@
+<div class="">
+  <ul class="nav">
+    <li
+      *ngFor="let menuTitle of menutitle">
+      <a [routerLink]="menutitle">
+        <p>{{ menuTitle}}</p>
+      </a>
+    </li>
+  </ul>
+</div>

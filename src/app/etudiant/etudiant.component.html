@@ -1,0 +1,50 @@
+<h1>Gestion des etudiant</h1>
+
+
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <label for="search">Recherche : </label>
+  <input id="search" type="text" formControlName="searchExpression" />
+  <button>Rechercher</button>
+</form>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Nom complet</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th>promo</th>
+    <th>Nouveau
+      <button [routerLink]="['/etudiants/create']" >
+        <mat-icon>add</mat-icon>
+      </button>
+    </th>
+  </tr>
+  </thead>
+  <tbody *ngIf="etudiants; else noUsers">
+  <tr *ngFor="let e of etudiants | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage, totalItems:totalItems}">
+    <td>{{e.prenom}} {{e.nom}}</td>
+    <td>{{e.email}}</td>
+    <td>{{e.role}}</td>
+    <td>{{e.promotionsId}}</td>
+    <td class="td-action">
+      <button [routerLink]="['/etudiants',e.id,'details']" >
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button  [routerLink]="['/etudiants/update',e.id]">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button (click)="delete(e.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<ng-template #noUsers>
+  <span class="text-danger">Aucun utilisateur trouvé !</span>
+</ng-template>
+<pagination-controls *ngIf="etudiants"
+                     (pageChange)="pageChanged($event)"
+                     previousLabel="Précédent"
+                     nextLabel="Suivant"></pagination-controls>

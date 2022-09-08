@@ -1,0 +1,19 @@
+    <h1>Espace Admin</h1>
+    <p>Bienvenue {{currentUsername}}</p>
+    <div class="menu-container">
+      <a routerLink="/home"  (click)="logout()">Déconnexion</a>
+      <br />
+      <a routerLink="/users" routerLinkActive="active">Gestion des utilisateurs</a>
+      <br/>
+      <a routerLink="/etudiants" routerLinkActive="active">Gestion des etudiants</a>
+      <br />
+      <a routerLink="/titres" routerLinkActive="active">Gestion des titre pro</a>
+      <br />
+      <a routerLink="/villes" routerLinkActive="active">Gestion des villes</a>
+      <br />
+      <a routerLink="/promotions" routerLinkActive="active">Gestion des Promos</a>
+      <br/>
+      <a routerLink="/niveaux" routerLinkActive="active">Gestion des Niveaux</a>
+    </div>
+
+

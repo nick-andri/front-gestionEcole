@@ -1,0 +1,26 @@
+
+<div *ngIf="ville">
+  <div class="col-md-6">
+    <div class="card card-primary">
+      <div class="card_content">
+
+
+        <div class="card-body">
+          <div class="form-group" >
+            <label for="identifiant">Id</label>
+            <input id="identifiant"  class="form-control" [value]="ville.id">
+          </div>
+          <div class="form-group" >
+            <label for="nom">Titre</label>
+            <input id="nom"  formControlName="nom" class="form-control" [value]="ville.nom" ></div>
+          <div class="form-group" >
+            <label for="slug">Slug</label>
+            <input id="slug" formControlName="slug" class="form-control" [value]="ville.slug"></div>
+        </div>
+
+        <button name="goBackButton" class="btn btn-primary" (click)="goBack()" >retour</button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<h1>Gestion des Niveaux </h1>
+
+
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <label for="search">Recherche : </label>
+  <input id="search" type="text" formControlName="searchExpression" />
+  <button>Rechercher</button>
+  <button (click)="reset()">Reset</button>
+</form>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+
+    <th>valeur</th>
+    <th>description</th>
+    <th>couleur</th>
+    <th>Nouveau
+      <button [routerLink]="['/niveaux/create']" >
+        <mat-icon>add</mat-icon>
+      </button>
+    </th>
+  </tr>
+  </thead>
+  <tbody *ngIf="niveaux; else noNiveaux">
+  <tr *ngFor="let n of niveaux | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage, totalItems:totalItems}">
+    <td>{{n.valeur}}</td>
+    <td>{{n.description}}</td>
+    <td>
+    <div class="colorCell">
+      {{n.codeCouleurHexa}}
+      <div class="colorCase" *ngIf="n.codeCouleurHexa !=''" [style.background-color] ="n.codeCouleurHexa" ></div>
+    </div>
+    </td>
+
+    <td class="td-action">
+      <button [routerLink]="['/niveaux',n.id,'details']" >
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button [routerLink]="['/niveaux/update',n.id]">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button (click)="delete(n.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<ng-template #noNiveaux>
+  <span class="text-danger">Aucun utilisateur trouvé !</span>
+</ng-template>
+<pagination-controls *ngIf="niveaux"
+                     (pageChange)="pageChanged($event)"
+                     previousLabel="Précédent"
+                     nextLabel="Suivant"></pagination-controls>

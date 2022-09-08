@@ -1,0 +1,55 @@
+
+<h1>Gestion des Promotions </h1>
+
+
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <label for="search">Recherche : </label>
+  <input id="search" type="text" formControlName="searchExpression" />
+  <button>Rechercher</button>
+  <button (click)="reset()">Reset</button>
+</form>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Date début</th>
+    <th>Date fin</th>
+    <th>Ville</th>
+    <th>Titre</th>
+    <th>Nouveau
+      <button [routerLink]="['/promotions/create']" >
+        <mat-icon>add</mat-icon>
+      </button>
+    </th>
+  </tr>
+  </thead>
+  <tbody *ngIf="promotions; else noPromotions">
+  <tr *ngFor="let p of promotions | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage, totalItems:totalItems} ;index as i">
+
+    <td>{{p.id}}</td>
+    <td>{{p.dateDebut}}</td>
+    <td>{{p.dateFin}}</td>
+    <td>{{listeVille[i]}}</td>
+    <td>{{listeTitrePro[i]}}</td>
+    <td class="td-action">
+      <button [routerLink]="['/promotions',p.id,'details']" >
+        <mat-icon>visibility</mat-icon>
+      </button>
+      <button [routerLink]="['/promotions/update',p.id]">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button (click)="delete(p.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<ng-template #noPromotions>
+  <span class="text-danger">Aucun utilisateur trouvé !</span>
+</ng-template>
+<pagination-controls *ngIf="promotions"
+                     (pageChange)="pageChanged($event)"
+                     previousLabel="Précédent"
+                     nextLabel="Suivant"></pagination-controls>

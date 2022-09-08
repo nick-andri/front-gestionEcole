@@ -1,0 +1,49 @@
+<h1>Gestion des utilisateurs</h1>
+
+
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <label for="search">Recherche : </label>
+  <input id="search" type="text" formControlName="searchExpression" />
+    <button>Rechercher</button>
+</form>
+
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nom complet</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Nouveau
+            <button [routerLink]="['/users/create']" >
+              <mat-icon>add</mat-icon>
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngIf="users; else noUsers">
+        <tr *ngFor="let u of users | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage, totalItems:totalItems}">
+          <td>{{u.prenom}} {{u.nom}}</td>
+          <td>{{u.email}}</td>
+          <td>{{u.role}}</td>
+          <td class="td-action">
+            <button [routerLink]="['/users',u.id,'details']" >
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button [routerLink]="['/users/update',u.id]">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="delete(u.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+
+          </td>
+        </tr>
+      </tbody>
+  </table>
+  <ng-template #noUsers>
+      <span class="text-danger">Aucun utilisateur trouvé !</span>
+  </ng-template>
+  <pagination-controls *ngIf="users"
+                      (pageChange)="pageChanged($event)"
+                      previousLabel="Précédent"
+                      nextLabel="Suivant"></pagination-controls>
