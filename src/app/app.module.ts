@@ -39,6 +39,11 @@ import { NiveauxCreateComponent } from './niveaux/niveaux-create/niveaux-create.
 import {NgxColorsModule} from "ngx-colors";
 import { PromotionCreateComponent } from './promotion/promotion-create/promotion-create.component';
 
+import { PromotionDetailComponent } from './promotion/promotion-detail/promotion-detail.component';
+import { PositionementComponent } from './positionement/positionement.component';
+import { PositionementCreateComponent } from './positionement/positionement-create/positionement-create.component';
+import { PositionementDetailComponent } from './positionement/positionement-detail/positionement-detail.component';
+
 
 
 
@@ -64,6 +69,12 @@ import { PromotionCreateComponent } from './promotion/promotion-create/promotion
     NiveauxComponent,
     NiveauxCreateComponent,
     PromotionCreateComponent,
+
+    PromotionDetailComponent,
+     PositionementComponent,
+     PositionementCreateComponent,
+     PositionementDetailComponent,
+
 
   ],
   imports: [

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
 import {EtudiantService} from "../_services/etudiant/etudiant.service";
@@ -11,7 +11,10 @@ import {baseEtudiant, Etudiant} from "../_models/etudiant";
 })
 export class EtudiantComponent implements OnInit {
 
+  @Input() promoId:number=0;
+
   etudiants?:Etudiant[] ;
+etudiantsPromo?:Etudiant[];
 
   itemsPerPage: number =10;
   currentPage:number=1;
@@ -24,22 +27,45 @@ export class EtudiantComponent implements OnInit {
       searchExpression:['']
     });
 
-    this.initTab();
   }
 
   initTab(){
-    this.initTotalItem();
-    this.etudiantService.getAllByPage(this.currentPage,this.itemsPerPage).subscribe(etudiants =>{
-      this.etudiants = etudiants;
-    })
+
+      if(this.promoId === 0){
+
+        this.etudiantService.getAllByPage(this.currentPage,this.itemsPerPage).subscribe(etudiants =>{
+          this.etudiants = etudiants;
+        });
+        this.initTotalItem();
+      }else{
+
+        this.etudiantService.getAllByPromo(this.currentPage,this.itemsPerPage,this.promoId)
+          .subscribe(etudiants =>{
+            this.etudiants =etudiants;
+
+          });
+        this.initTotalItem();
+      }
+
+
+
+
   }
 
-  initTotalItem(){this.etudiantService.count().subscribe( nb =>{
-      this.totalItems= nb;
-    })
+  initTotalItem(){
+
+    if(this.promoId != 0){
+      this.totalItems=this.etudiants!.length;
+    }else{
+      this.etudiantService.count().subscribe( nb =>{
+        this.totalItems= nb;
+      })
+    }
+
   }
 
   ngOnInit(): void {
+
     this.initTab();
   }
 
@@ -55,6 +81,7 @@ export class EtudiantComponent implements OnInit {
 
 
   delete(e: any) {
-        this.etudiantService
+        this.etudiantService.delete(e.id);
+        this.initTab();
   }
 }

@@ -32,6 +32,10 @@ export class EtudiantService {
     return this.http.get<Etudiant[]>(this.API+`${page}/${size}`);
   }
 
+  getAllByPromo(page:number,size:number,promoId:number){
+    return this.http.get<Etudiant[]>(this.API+`${page}/${size}/promo/${promoId}`);
+  }
+
   save(etudiant:Etudiant){
     return this.http.post<any>(this.API,etudiant,this.httpHeaders)
       .pipe(map(saveEtu => {return saveEtu}));
@@ -50,5 +54,7 @@ export class EtudiantService {
     return this.http.get<Etudiant[]>(this.API+`${page}/${size}/${search}`);
   }
 
-
+delete(id:number){
+    return this.http.delete(this.API+`${id}`);
+}
 }

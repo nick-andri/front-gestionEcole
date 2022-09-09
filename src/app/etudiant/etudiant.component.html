@@ -21,7 +21,7 @@
     </th>
   </tr>
   </thead>
-  <tbody *ngIf="etudiants; else noUsers">
+  <tbody *ngIf="etudiants ; else noUsers">
   <tr *ngFor="let e of etudiants | paginate: {itemsPerPage:itemsPerPage, currentPage: currentPage, totalItems:totalItems}">
     <td>{{e.prenom}} {{e.nom}}</td>
     <td>{{e.email}}</td>

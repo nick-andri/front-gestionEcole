@@ -29,7 +29,6 @@ export class PromotionCreateComponent implements OnInit {
       id:'',
       version:'',
       description:'',
-
       dateDebut:'',
       dateFin:'',
       titreProfessionnelId:'',
@@ -37,7 +36,6 @@ export class PromotionCreateComponent implements OnInit {
     })
 
     this.promotionUp=this.promotion;
-    console.log('construct : '+this.isUpdate);
 
   }
 
@@ -51,7 +49,7 @@ export class PromotionCreateComponent implements OnInit {
           this.promotion=t;
           this.createForm.controls["dateDebut"].setValue(this.promotion.dateDebut);
           this.createForm.controls["dateFin"].setValue(this.promotion.dateFin);
-          this.createForm.controls["desciption"].setValue(this.promotion.description);
+          this.createForm.controls["description"].setValue(this.promotion.description);
         })
     }
   }

@@ -1,1 +1,28 @@
-<p>promotion-create works!</p>
+<div *ngIf="isUpdate"><h1>Modification Promotion </h1></div>
+<div *ngIf="!isUpdate"><h1>Nouvelle Promotion </h1></div>
+
+<div class="col-md-6">
+  <div class="card card-primary">
+    <div class="card_content">
+
+      <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+        <div class="card-body">
+          <div class="form-group" >
+            <label for="dateDebut">dateDebut</label>
+            <input id="dateDebut"  formControlName="dateDebut" class="form-control" ></div>
+          <div class="form-group" >
+            <label for="dateFin">dateFin</label>
+            <input id="dateFin" formControlName="dateFin" class="form-control" ></div>
+          <div class="form-group" >
+            <label for="description">description</label>
+            <input id="description" formControlName="description" class="form-control"></div>
+            <div>TODO Ajouter etudiant</div>
+          <button *ngIf="!isUpdate" name="ButtonForm" class="btn btn-primary">creer</button>
+          <button *ngIf="isUpdate" name="ButtonForm"  class="btn btn-primary">update</button>
+        </div>
+      </form>
+      <button name="goBackButton" class="btn btn-primary" (click)="goBack()" >retour</button>
+    </div>
+  </div>
+
+</div>

@@ -17,6 +17,11 @@ import {VilleDetailComponent} from "./ville/ville-detail/ville-detail.component"
 import {PromotionComponent} from "./promotion/promotion.component";
 import {NiveauxComponent} from "./niveaux/niveaux.component";
 import {NiveauxCreateComponent} from "./niveaux/niveaux-create/niveaux-create.component";
+import {PromotionCreateComponent} from "./promotion/promotion-create/promotion-create.component";
+import {PromotionDetailComponent} from "./promotion/promotion-detail/promotion-detail.component";
+import {PositionementComponent} from "./positionement/positionement.component";
+import {PositionementCreateComponent} from "./positionement/positionement-create/positionement-create.component";
+import {PositionementDetailComponent} from "./positionement/positionement-detail/positionement-detail.component";
 
 const routes: Routes = [
   { path:'', component: AdminComponent, canActivate: [AuthGuard]},
@@ -46,11 +51,13 @@ const routes: Routes = [
 /*
   { path:'niveaux/:id/details', component: NiveauxDetailComponent, canActivate: [AuthGuard]},
 */
-  /*{ path:'promotions/create', component: PromotionCreateComponent, canActivate: [AuthGuard]},
+  { path:'promotions/create', component: PromotionCreateComponent, canActivate: [AuthGuard]},
   { path:'promotions/update/:id', component: PromotionCreateComponent, canActivate: [AuthGuard]},
   { path:'promotions/:id/details', component: PromotionDetailComponent, canActivate: [AuthGuard]},
-*/
-
+  { path:'positionements', component: PositionementComponent, canActivate: [AuthGuard]},
+  { path:'positionements/update/:id', component: PositionementCreateComponent, canActivate: [AuthGuard]},
+  { path:'positionements/create', component: PositionementCreateComponent, canActivate: [AuthGuard]},
+  { path:'positionements/:id/details', component: PositionementDetailComponent, canActivate: [AuthGuard]},
 
   //otherwire, redirect to AdminComponent
   { path:'**', redirectTo:''}
